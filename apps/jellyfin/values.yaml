@@ -1,0 +1,17 @@
+image:
+  repository: jellyfin/jellyfin
+  tag: latest
+
+persistence:
+  config:
+    enabled: true
+    size: 5Gi
+  media:
+    enabled: true
+    existingClaim: jellyfin-media-pvc
+
+service:
+  type: LoadBalancer
+
+env:
+  TZ: "Europe/Brussels"

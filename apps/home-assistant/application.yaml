@@ -6,13 +6,10 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/kcydnavnaad/k3s-homelab.git
-    targetRevision: main
-    path: apps/home-assistant
+    repoURL: http://pajikos.github.io/home-assistant-helm-chart/
+    chart: home-assistant
+    targetRevision: 0.3.54
     helm:
-      chart: home-assistant
-      repoURL: http://pajikos.github.io/home-assistant-helm-chart/
-      targetRevision: 0.3.54
       valueFiles:
         - values.yaml
   destination:

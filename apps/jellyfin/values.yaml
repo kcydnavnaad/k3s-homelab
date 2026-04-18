@@ -1,6 +1,5 @@
-image:
-  repository: jellyfin/jellyfin
-  tag: latest
+service:
+  type: LoadBalancer
 
 persistence:
   config:
@@ -9,9 +8,6 @@ persistence:
   media:
     enabled: true
     existingClaim: jellyfin-media-pvc
-
-service:
-  type: LoadBalancer
 
 env:
   TZ: "Europe/Brussels"

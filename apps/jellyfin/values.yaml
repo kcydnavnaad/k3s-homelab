@@ -5,9 +5,16 @@ persistence:
   config:
     enabled: true
     size: 5Gi
-  media:
-    enabled: true
-    existingClaim: jellyfin-media-pvc
+
+extraVolumes:
+  - name: media
+    nfs:
+      server: 192.168.1.233
+      path: /volume1/Media
+
+extraVolumeMounts:
+  - name: media
+    mountPath: /media
 
 env:
   TZ: "Europe/Brussels"

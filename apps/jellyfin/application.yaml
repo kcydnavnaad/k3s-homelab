@@ -10,14 +10,21 @@ spec:
     chart: jellyfin
     targetRevision: "*"
     helm:
-      valueFiles:
-        - values.yaml
+      values: |
+        service:
+          type: LoadBalancer
+        persistence:
+          config:
+            enabled: true
+            size: 5Gi
+          media:
+            enabled: true
+            existingClaim: jellyfin-media-pvc
+        env:
+          TZ: "Europe/Brussels"
   destination:
     server: https://kubernetes.default.svc
     namespace: jellyfin
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
     syncOptions:
       - CreateNamespace=true

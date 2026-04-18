@@ -6,8 +6,16 @@ persistence:
     enabled: true
     size: 5Gi
   media:
-    enabled: true
-    existingClaim: jellyfin-media-pvc
+    enabled: false
+
+extraVolumes:
+  - name: nfs-media
+    persistentVolumeClaim:
+      claimName: jellyfin-media-pvc
+
+extraVolumeMounts:
+  - name: nfs-media
+    mountPath: /media
 
 env:
   TZ: "Europe/Brussels"

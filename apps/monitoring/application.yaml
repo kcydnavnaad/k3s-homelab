@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    targetRevision: "*"
+    helm:
+      values: |
+        grafana:
+          service:
+            type: LoadBalancer
+            annotations:
+              metallb.io/loadBalancerIPs: "192.168.1.154"
+          adminPassword: "kiesEenWachtwoord"
+        prometheus:
+          service:
+            type: ClusterIP
+        alertmanager:
+          service:
+            type: ClusterIP
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

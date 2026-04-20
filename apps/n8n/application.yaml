@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://8gears.container-registry.com/chartrepo/library
+    repoURL: https://community-charts.github.io/helm-charts
     chart: n8n
     targetRevision: "*"
     helm:
@@ -18,9 +18,8 @@ spec:
         persistence:
           enabled: true
           size: 5Gi
-        env:
-          GENERIC_TIMEZONE: "Europe/Brussels"
-          TZ: "Europe/Brussels"
+        generic:
+          timezone: "Europe/Brussels"
   destination:
     server: https://kubernetes.default.svc
     namespace: n8n

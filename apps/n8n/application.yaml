@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n8n
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://8gears.container-registry.com/chartrepo/library
+    chart: n8n
+    targetRevision: "*"
+    helm:
+      values: |
+        service:
+          type: LoadBalancer
+          annotations:
+            metallb.io/loadBalancerIPs: "192.168.1.155"
+        persistence:
+          enabled: true
+          size: 5Gi
+        env:
+          GENERIC_TIMEZONE: "Europe/Brussels"
+          TZ: "Europe/Brussels"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: n8n
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true

@@ -13,16 +13,15 @@ spec:
     targetRevision: "*"
     helm:
       values: |
+        timezone: "Europe/Brussels"
         service:
           type: LoadBalancer
           annotations:
             metallb.io/loadBalancerIPs: "192.168.1.155"
-            link.argocd.argoproj.io/external-link: https://n8n2.webbaas.be
-        persistence:
-          enabled: true
-          size: 5Gi
-        generic:
-          timezone: "Europe/Brussels"
+        main:
+          persistence:
+            enabled: true
+            size: 5Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: n8n

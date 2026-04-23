@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: n8n
   namespace: argocd
+  annotations:
+    link.argocd.argoproj.io/external-link: https://n8n2.webbaas.be
 spec:
   project: default
   source:
@@ -15,6 +17,7 @@ spec:
           type: LoadBalancer
           annotations:
             metallb.io/loadBalancerIPs: "192.168.1.155"
+            link.argocd.argoproj.io/external-link: https://n8n2.webbaas.be
         persistence:
           enabled: true
           size: 5Gi

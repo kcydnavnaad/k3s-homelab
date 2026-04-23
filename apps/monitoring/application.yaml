@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: monitoring
   namespace: argocd
+  annotations:
+    link.argocd.argoproj.io/external-link: https://grafana.webbaas.be
 spec:
   project: default
   source:

@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: verfwinkel-vranken
   namespace: argocd
+  annotations:
+    link.argocd.argoproj.io/external-link: https://verfwinkel-vranken2.webbaas.be
 spec:
   project: default
   source:

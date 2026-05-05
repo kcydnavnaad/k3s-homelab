@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: teams-slack
+  namespace: argocd
+  annotations:
+    link.argocd.argoproj.io/external-link: https://slack.webbaas.be
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/kcydnavnaad/k3s-homelab.git
+    targetRevision: main
+    path: apps/teams-slack
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: teams-slack
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
